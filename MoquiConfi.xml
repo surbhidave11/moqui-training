@@ -1,3 +1,8 @@
+
 <entity-facade>
     <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
-</entity-facade>
+
+    <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
+
+
+    </entity-facade>
