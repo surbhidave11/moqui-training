@@ -36,7 +36,10 @@ tasks.withType(GroovyCompile) { options.compilerArgs << "-proc:none" }
 dependencies {
     implementation project(':framework')
     implementation 'com.auth0:java-jwt:4.4.0'
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     runtimeOnly 'mysql:mysql-connector-java:8.0.33'
 }
 
