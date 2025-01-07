@@ -109,6 +109,21 @@
     </service>
 
 
+<<<<<<< HEAD
+=======
+
+    <!--    Service through entity-auto-->
+    <!--    <service verb="create" noun="MoquiTraining" type="entity-auto">-->
+    <!--        <in-parameters>-->
+    <!--            <auto-parameters include="nonpk"/>-->
+    <!--            <parameter name="trainingName" required="true"/>-->
+    <!--            <parameter name="trainingDate" required="true"/>-->
+    <!--        </in-parameters>-->
+    <!--        <out-parameters>-->
+    <!--            <auto-parameters include="pk" required="true"/>-->
+    <!--        </out-parameters>-->
+    <!--    </service>-->
+>>>>>>> 3fb4a1dabb4cc0929aa2a3b51cd7d619060a6e79
 
 
     <!--    Service through Groovy Scripts-->
