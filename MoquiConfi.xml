@@ -1,19 +1,4 @@
-<<<<<<< HEAD
-
 <entity-facade>
-    <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
-
-    <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
-
-
-    </entity-facade>
-=======
-<<<<<<< HEAD
-<entity-facade>
-    <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
-=======
-<entity-facade>
-    <entity-group name="default" entity-location="com ponent://moqui-training/entities"/>
->>>>>>> 158ec9f11c3d918c25bd8ef03f463d1e93c87d36
+    <entity-group name="default" entity-location="component://moqui-training/entities"/>
 </entity-facade>
->>>>>>> origin/main
+
