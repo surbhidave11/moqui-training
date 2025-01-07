@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <entity-facade-xml >
     <MoquiTraining trainingName="Java Basics" trainingDate="2025-01-01" trainingPrice="150.00" trainingDuration="5"/>
     <MoquiTraining trainingName="Advanced AI" trainingDate="2025-02-01" trainingPrice="300.00" trainingDuration="8"/>
-=======
-<entity-facade-xml >
-    <MoquiTraining trainingName="Java Basics" trainingDate="2025-01-01" trainingPrice="150.00" trainingDuration="5"/>
-    <MoquiTraining trainingName="Advanced AI" trainingDate="2025-02-01" trainingPrice="300.00" trainingDuration="8"/>
->>>>>>> origin/main
+
+
 </entity-facade-xml>

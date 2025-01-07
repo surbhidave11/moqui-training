@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <!--    Service through entity-auto-->
+<service verb="create" noun="Party" type="entity-auto">
+    <in-parameters>
+        <auto-parameters include="nonpk"/>
+        <parameter name="partyId" required="true"/>
+        <parameter name="partyType" required="true"/>
+        <parameter name="firstName" required="true"/>
+        <parameter name="lastName" required="true"/>
+
+    </in-parameters>
+    <out-parameters>
+        <auto-parameters include="pk" required="true"/>
+    </out-parameters>
+</service>
+
+
+
+    <!--    Fetching record from the database-->
+    <service verb="fetch" noun="Party">
+        <in-parameters>
+           <parameter name="partyId" entity-name="moqui.training.Party"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="partyList" required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.Party" list="partyList">
+                <econdition field-name="partyType" ignore-if-empty="true"/>
+                <econdition field-name="partyId" ignore-if-empty="true"/>
+                <select-field field-name="partyId"/>
+                <select-field field-name="firstName"/>
+                <select-field field-name="lastName"/>
+                <select-field field-name="partyType"/>
+
+            </entity-find>
+        </actions>
+    </service>
+
+
+    <service verb="CreateUpdate" noun="Party">
+        <in-parameters>
+            <auto-parameters entity-name="Party" include="nonpk"/>
+            <parameter name="partyId"/>
+            <parameter name="partyType" required="true"/>
+            <parameter name="firstName" required="true"/>
+            <parameter name="lastName" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="partyId"  required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find-one entity-name="Party" value-field="isPresent">
+                <field-map field-name="partyId" from="context.partyId"/>
+            </entity-find-one>
+            <if condition="isPresent==null">
+                <entity-make-value entity-name="Party" value-field="Party"/>
+                <entity-set value-field="Party" include="all"> </entity-set>
+                <entity-create value-field="Party" > </entity-create>
+            </if>
+            <if condition="isPresent!=null">
+                <entity-set value-field="isPresent" include="all"/>
+                <entity-update value-field="isPresent"/>
+            </if>
+        </actions>
+    </service>
+
+    <!-- to delete the data -->
+
+    <service verb="delete" noun="Party" type="entity-auto">
+        <in-parameters>
+            <parameter name="partyId" required="true"/>
+        </in-parameters>
+    </service>
+
+
+
+        <!-- Add Contact Mechanism -->
+        <service verb="create" noun="ContactMech" type="entity-auto">
+            <description>Add a new contact mechanism for a party.</description>
+            <in-parameters>
+                <parameter name="partyId" required="true"/>
+                <parameter name="streetAddress" required="true"/>
+                <parameter name="city" required="true"/>
+                <parameter name="state" required="true"/>
+                <parameter name="postalCode"/>
+            </in-parameters>
+            <out-parameters>
+                <parameter name="contactMechId"/>
+            </out-parameters>
+        </service>
+
+
+        <!-- Retrieve Contact Mechanisms -->
+        <service verb="read" noun="ContactMechanisms">
+            <description>Retrieve all contact mechanisms for a specific party.</description>
+            <in-parameters>
+                <parameter name="partyId" required="true"/>
+            </in-parameters>
+            <actions>
+                <entity-find entity-name="ContactMech">
+                    <econdition field-name="partyId" from="partyId"/>
+                </entity-find>
+            </actions>
+        </service>
+
+        <!-- Update Contact Mechanism -->
+        <service verb="update" noun="ContactMechanism" type="entity-auto">
+            <description>Update an existing contact mechanism for a party.</description>
+            <in-parameters>
+                <parameter name="partyId" required="true"/>
+                <parameter name="streetAddress" required="true"/>
+                <parameter name="city" required="true"/>
+                <parameter name="state" required="true"/>
+                <parameter name="postalCode"/>
+            </in-parameters>
+        </service>
+
+        <!-- Delete Contact Mechanism -->
+        <service verb="delete" noun="ContactMech" type="entity-auto">
+            <description>Delete a specific contact mechanism for a party.</description>
+            <in-parameters>
+                <parameter name="contactMechId" required="true"/>
+            </in-parameters>
+        </service>
+</services>

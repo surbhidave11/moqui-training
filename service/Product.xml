@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <!--    Service through entity-auto-->
+    <service verb="create" noun="Product" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="nonpk"/>
+            <parameter name="productId" required="true"/>
+            <parameter name="productName" required="true"/>
+            <parameter name="color" required="true"/>
+            <parameter name="size" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="pk" required="true"/>
+        </out-parameters>
+    </service>
+
+<!--product fetch-->
+    <service verb="fetch" noun="Product">
+        <in-parameters>
+            <parameter name="productId" entity-name="moqui.training.Product"/>
+
+        </in-parameters>
+        <out-parameters>
+            <parameter name="productList" required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.Product" list="productList">
+                <econdition field-name="productId" ignore-if-empty="true"/>
+                <select-field field-name="productId"/>
+                <select-field field-name="productName"/>
+                <select-field field-name="color"/>
+                <select-field field-name="size"/>
+
+            </entity-find>
+        </actions>
+    </service>
+
+<!--Create and Update for Product-->
+    <service verb="CreateUpdate" noun="Product">
+            <in-parameters>
+                <auto-parameters entity-name="Product" include="nonpk"/>
+                <parameter name="productId"/>
+                <parameter name="productName" required="true"/>
+                <parameter name="color" required="true"/>
+                <parameter name="size" required="true"/>
+            </in-parameters>
+            <out-parameters>
+                <parameter name="productId"  required="true"/>
+            </out-parameters>
+            <actions>
+                <entity-find-one entity-name="Product" value-field="isPresent">
+                    <field-map field-name="productId" from="context.productId"/><!--also select parameter.trainingId -->
+                </entity-find-one>
+                <if condition="isPresent==null">
+                    <entity-make-value entity-name="Product" value-field="Product"/>
+                    <entity-set value-field="Product" include="all"> </entity-set>
+                    <entity-create value-field="Product" > </entity-create>
+                </if>
+                <if condition="isPresent!=null">
+                    <entity-set value-field="isPresent" include="all"/>
+                    <entity-update value-field="isPresent"/>
+                </if>
+            </actions>
+        </service>
+
+   <!-- to delete the data -->
+
+        <service verb="delete" noun="Product" type="entity-auto">
+            <in-parameters>
+                <parameter name="productId" required="true"/>
+            </in-parameters>
+        </service>
+
+
+</services>
+
+

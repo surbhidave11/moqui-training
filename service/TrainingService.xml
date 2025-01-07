@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
     <!--    Service through entity-auto-->
@@ -110,35 +109,7 @@
     </service>
 
 
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
-    <!--    Service through entity-auto-->
-    <!--    <service verb="create" noun="MoquiTraining" type="entity-auto">-->
-    <!--        <in-parameters>-->
-    <!--            <auto-parameters include="nonpk"/>-->
-    <!--            <parameter name="trainingName" required="true"/>-->
-    <!--            <parameter name="trainingDate" required="true"/>-->
-    <!--        </in-parameters>-->
-    <!--        <out-parameters>-->
-    <!--            <auto-parameters include="pk" required="true"/>-->
-    <!--        </out-parameters>-->
-    <!--    </service>-->
 
-    <!--    Service through inline-->
-    <!--    <service verb="create" noun="MoquiTraining">-->
-    <!--        <in-parameters>-->
-    <!--            <auto-parameters entity-name="moqui.training.MoquiTraining" include="nonpk"/>-->
-    <!--            <parameter name="trainingName" required="true"/>-->
-    <!--            <parameter name="trainingDate" required="true"/>-->
-    <!--        </in-parameters>-->
-    <!--        <out-parameters>-->
-    <!--            <parameter name="trainingId"/>-->
-    <!--        </out-parameters>-->
-    <!--        <actions>-->
-    <!--            <service-call name="create#moqui.training.MoquiTraining" in-map="context" out-map="context"/>-->
-    <!--        </actions>-->
-    <!--    </service>-->
 
     <!--    Service through Groovy Scripts-->
     <service verb="create" noun="MoquiTraining" type="script"
@@ -152,6 +123,8 @@
             <parameter name="trainingId"/>
         </out-parameters>
     </service>
+
+
 
     <!--    Fetching record from the database-->
     <service verb="fetch" noun="MoquiTraining">
@@ -219,8 +192,7 @@
             ]]>
             </script>
         </actions>
+
+
     </service>
-
-
->>>>>>> origin/main
 </services>
