@@ -43,8 +43,18 @@
         <field name="billingContactMechId" type="id"/>
 
         <relationship type="one" related="Party" fk-name="FK_Party_OrderHeader"/>
+<<<<<<< HEAD
+        <relationship type="one" related="ContactMech" fk-name="FK_ShippingContactMech" mutable="true">
+            <key-map field-name="shippingContactMechId" related="contactMechId" />
+        </relationship>
+        <relationship type="one" related="ContactMech" fk-name="FK_BillingContactMech" mutable="true">
+            <key-map field-name="billingContactMechId" related="contactMechId" />
+        </relationship>
+
+=======
         <relationship type="one" related="ContactMech" fk-name="FK_ShippingContactMech" mutable="true"/>
         <relationship type="one" related="ContactMech" fk-name="FK_BillingContactMech" mutable="true"/>
+>>>>>>> 3fb4a1dabb4cc0929aa2a3b51cd7d619060a6e79
     </entity>
 
 

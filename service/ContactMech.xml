@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+    <!--    Service through entity-auto-->
+    <service verb="create" noun="ContactMech" type="entity-auto">
+        <in-parameters>
+            <auto-parameters include="nonpk"/>
+            <parameter name="contactMechId" required="true"/>
+            <parameter name="partyId" required="true"/>
+            <parameter name="streetAddress" required="true"/>
+            <parameter name="city" required="true"/>
+            <parameter name="state" required="true"/>
+            <parameter name="postalCode" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters include="pk" required="true"/>
+        </out-parameters>
+    </service>
+
+    <!--contact fetch-->
+    <service verb="fetch" noun="ContactMech">
+        <in-parameters>
+            <parameter name="contactMechId" entity-name="moqui.training.ContactMech"/>
+            <parameter name="partyId" entity-name="moqui.training.Party"/>
+
+        </in-parameters>
+        <out-parameters>
+            <parameter name="ContactMechList" required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="moqui.training.ContactMech" list="ContactMechList">
+                <econdition field-name="contactMechId" ignore-if-empty="true"/>
+                <select-field field-name="partyId"/>
+                <select-field field-name="streetAddress"/>
+                <select-field field-name="city"/>
+                <select-field field-name="address"/>
+                <select-field field-name="postalCode"/>
+
+            </entity-find>
+        </actions>
+    </service>
+
+    <!--Create and Update for Product-->
+    <!--<service verb="store" noun="ContactMech">
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech" include="nonpk"/>
+            <parameter name="contactMechId"/>
+            <parameter name="partyId" required="true"/>
+            &lt;!&ndash;<parameter name=" streetAddress" required="true"/>&ndash;&gt;
+            <parameter name="city" required="true"/>
+            <parameter name="postalCode" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="contactMechId"  required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find-one entity-name="contactMechId" value-field="isPresent">
+                <field-map field-name="contactMechId" from="context.contectMechId"/>
+            </entity-find-one>
+            <if condition="isPresent==null">
+                <entity-make-value entity-name="contactMechId" value-field="ContactMech"/>
+                <entity-set value-field="ContactMech" include="all"> </entity-set>
+                <entity-create value-field="ContactMech" > </entity-create>
+            </if>
+            <if condition="isPresent!=null">
+                <entity-set value-field="isPresent" include="all"/>
+                <entity-update value-field="isPresent"/>
+            </if>
+        </actions>
+    </service>-->
+
+    <service verb="store" noun="ContactMech">
+        <description>Create or update a Contact Mechanism.</description>
+        <in-parameters>
+            <auto-parameters entity-name="ContactMech" include="nonpk"/>
+            <parameter name="contactMechId"/>
+            <parameter name="partyId" required="true"/>
+            <!--<parameter name="streetAddress" required="true"/>-->
+            <parameter name="city" required="true"/>
+            <parameter name="postalCode" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="contactMechId" required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find-one entity-name="ContactMech" value-field="isPresent">
+                <field-map field-name="contactMechId" from="context.contactMechId"/>
+            </entity-find-one>
+            <if condition="isPresent == null">
+                <entity-make-value entity-name="ContactMech" value-field="newContactMech"/>
+                <entity-set value-field="newContactMech" include="all"/>
+                <entity-create value-field="newContactMech"/>
+            </if>
+            <if condition="isPresent != null">
+                <entity-set value-field="isPresent" include="all"/>
+                <entity-update value-field="isPresent"/>
+            </if>
+        </actions>
+    </service>
+
+
+    <!-- to delete the data -->
+
+    <service verb="delete" noun="ContactMech" type="entity-auto">
+        <in-parameters>
+            <parameter name="contactMechId" required="true"/>
+        </in-parameters>
+    </service>
+
+
+</services>
+
+
