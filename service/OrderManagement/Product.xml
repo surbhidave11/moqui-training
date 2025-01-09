@@ -65,12 +65,23 @@
 
    <!-- to delete the data -->
 
-        <service verb="delete" noun="Product" type="entity-auto">
-            <in-parameters>
-                <parameter name="productId" required="true"/>
-            </in-parameters>
-        </service>
+    <service verb="delete" noun="Product">
+        <in-parameters>
+            <parameter name="productId" />
+        </in-parameters>
 
+        <out-parameters>
+            <parameter name="productId" />
+        </out-parameters>
+
+        <actions>
+            <entity-find-one entity-name="moqui.training.Product" value-field="filterlist">
+                <field-map field-name="productId" />
+            </entity-find-one>
+            <entity-delete-related value-field="filterlist" relationship-name="OrderItem" />
+            <entity-delete value-field="filterlist" />
+        </actions>
+    </service>
 
 </services>
 

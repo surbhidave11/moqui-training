@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-3.xsd"
+    name="OrderManagement" displayName="Orders Management" version="1.0.0" description="Services for Party"  require-authentication="anonymous-all">
+    <!-- Create Party -->
+    <resource name="parties" >
+        <method type="post" >
+            <service name="OrderManagement.Party.create#Party"/>
+        </method>
+        <id name="partyId">
+            <!-- get Party -->
+            <method type="get">
+                <service name="OrderManagement.Party.fetch#Party"/>
+            </method>
+            <!-- Delete Party -->
+            <method type="delete">
+                <service name="OrderManagement.Party.delete#Party"/>
+            </method>
+            <!-- update Party -->
+            <method type="put">
+                <service name="OrderManagement.Party.CreateUpdate#Party"/>
+            </method>
+            <resource name="contact" >
+                <!-- Create Contact -->
+                <method type="post">
+                    <service name="OrderManagement.ContactMech.create#ContactMech"/>
+                </method>
+
+
+                <!-- Delete contact -->
+                <id name="contactMechId">
+                    <method type="delete">
+                        <service name="OrderManagement.ContactMech.delete#ContactMech"/>
+                    </method>
+                    <!-- update contact -->
+                    <method type="put">
+                        <service name="OrderManagement.ContactMech.store#ContactMech"/>
+                    </method>
+                    <!-- get contact -->
+                    <method type="get">
+                        <service name="OrderManagement.ContactMech.fetch#ContactMech"/>
+                    </method>
+                </id>
+
+            </resource>
+        </id>
+    </resource>
+    <resource name="products">
+        <!--Create Products-->
+        <method type="post" >
+            <service name="OrderManagement.Product.create#Product"/>
+        </method>
+        <id name="productId">
+        <!-- get Party -->
+        <method type="get">
+            <service name="OrderManagement.Product.fetch#Product"/>
+        </method>
+        <!-- Delete Party -->
+        <method type="delete">
+            <service name="OrderManagement.Product.delete#Product"/>
+        </method>
+        <!-- update Party -->
+        <method type="put">
+            <service name="OrderManagement.Product.CreateUpdate#Product"/>
+        </method>
+        </id>
+
+    </resource>
+
+
+
+
+
+    <resource name="orders">
+        <!--Create Orders-->
+        <method type="post" >
+            <service name="OrderManagement.OrderHeader.create#OrderHeader"/>
+        </method>
+        <id name="orderId">
+            <!-- get Party -->
+            <method type="get">
+                <service name="OrderManagement.OrderHeader.find#OrderHeader"/>
+            </method>
+            <!-- Delete Party -->
+            <method type="delete">
+                <service name="OrderManagement.OrderHeader.delete#OrderHeader"/>
+            </method>
+            <!-- update Party -->
+            <method type="put">
+                <service name="OrderManagement.OrderHeader.update#OrderHeader"/>
+            </method>
+
+            <resource name="items">
+                <method type="post">
+                    <service name="OrderManagement.OrderItem.create#OrderItem" />
+                </method>
+            </resource>
+        </id>
+
+    </resource>
+
+</resource>
+
+

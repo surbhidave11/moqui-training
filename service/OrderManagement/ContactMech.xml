@@ -39,34 +39,6 @@
         </actions>
     </service>
 
-    <!--Create and Update for Product-->
-    <!--<service verb="store" noun="ContactMech">
-        <in-parameters>
-            <auto-parameters entity-name="ContactMech" include="nonpk"/>
-            <parameter name="contactMechId"/>
-            <parameter name="partyId" required="true"/>
-            &lt;!&ndash;<parameter name=" streetAddress" required="true"/>&ndash;&gt;
-            <parameter name="city" required="true"/>
-            <parameter name="postalCode" required="true"/>
-        </in-parameters>
-        <out-parameters>
-            <parameter name="contactMechId"  required="true"/>
-        </out-parameters>
-        <actions>
-            <entity-find-one entity-name="contactMechId" value-field="isPresent">
-                <field-map field-name="contactMechId" from="context.contectMechId"/>
-            </entity-find-one>
-            <if condition="isPresent==null">
-                <entity-make-value entity-name="contactMechId" value-field="ContactMech"/>
-                <entity-set value-field="ContactMech" include="all"> </entity-set>
-                <entity-create value-field="ContactMech" > </entity-create>
-            </if>
-            <if condition="isPresent!=null">
-                <entity-set value-field="isPresent" include="all"/>
-                <entity-update value-field="isPresent"/>
-            </if>
-        </actions>
-    </service>-->
 
     <service verb="store" noun="ContactMech">
         <description>Create or update a Contact Mechanism.</description>
@@ -100,13 +72,24 @@
 
     <!-- to delete the data -->
 
-    <service verb="delete" noun="ContactMech" type="entity-auto">
+    <service verb="delete" noun="ContactMech">
         <in-parameters>
-            <parameter name="contactMechId" required="true"/>
+            <parameter name="contactMechId" />
+            <parameter name="partyId" />
         </in-parameters>
+
+        <out-parameters>
+            <parameter name="contactMechId" />
+        </out-parameters>
+
+        <actions>
+            <entity-find-one entity-name="moqui.training.ContactMech" value-field="filterlist">
+                <field-map field-name="contactMechId" from="contactMechId" />
+            </entity-find-one>
+            <entity-delete-related value-field="filterlist" relationship-name="OrderHeader" />
+            <entity-delete value-field="filterlist" />
+        </actions>
     </service>
-
-
 </services>
 
 

@@ -68,10 +68,22 @@
 
     <!-- to delete the data -->
 
-    <service verb="delete" noun="Party" type="entity-auto">
+    <service verb="delete" noun="Party" >
         <in-parameters>
-            <parameter name="partyId" required="true"/>
+            <parameter name="partyId" />
         </in-parameters>
+
+        <out-parameters>
+            <parameter name="partyId" />
+        </out-parameters>
+
+        <actions>
+            <entity-find-one entity-name="moqui.training.Party" value-field="filterlist">
+                <field-map field-name="partyId" from="partyId" />
+            </entity-find-one>
+            <entity-delete-related value-field="filterlist" relationship-name="OrderHeader" />
+            <entity-delete value-field="filterlist" />
+        </actions>
     </service>
 
 
@@ -118,10 +130,21 @@
         </service>
 
         <!-- Delete Contact Mechanism -->
-        <service verb="delete" noun="ContactMech" type="entity-auto">
-            <description>Delete a specific contact mechanism for a party.</description>
-            <in-parameters>
-                <parameter name="contactMechId" required="true"/>
-            </in-parameters>
-        </service>
+    <service verb="delete" noun="ContactMech" >
+        <in-parameters>
+            <parameter name="contactMechId" />
+        </in-parameters>
+
+        <out-parameters>
+            <parameter name="contactMechId" />
+        </out-parameters>
+
+        <actions>
+            <entity-find-one entity-name="moqui.training.ContactMech" value-field="filterlist">
+                <field-map field-name="contactMechId" from="orderId" />
+            </entity-find-one>
+            <entity-delete-related value-field="filterlist" relationship-name="OrderHeader" />
+            <entity-delete value-field="filterlist" />
+        </actions>
+    </service>
 </services>
